@@ -12,9 +12,9 @@ def display_board(board):
         else:
             return Fore.YELLOW + cell + Style.RESET_ALL
     print(' ' + colored(board[0]) + ' | ' + colored(board[1]) + ' | ' + colored(board[2]))
-    print(Fore.CYAN + '---+---+---' + Style.RESET_ALL)
+    print(Fore.CYAN + '-----------' + Style.RESET_ALL)
     print(' ' + colored(board[3]) + ' | ' + colored(board[4]) + ' | ' + colored(board[5]))
-    print(Fore.CYAN + '---+---+---' + Style.RESET_ALL)
+    print(Fore.CYAN + '-----------' + Style.RESET_ALL)
     print(' ' + colored(board[6]) + ' | ' + colored(board[7]) + ' | ' + colored(board[8]))
     print()
 
@@ -59,9 +59,9 @@ def ai_move(board, ai_symbol, player_symbol):
 
 def check_win(board, symbol):
     win_conditions = [
-        (0, 1, 2), (3, 4, 5), (6, 7, 8), # Horizontal
-        (0, 3, 6), (1, 4, 7), (2, 5, 8), # Vertical
-        (0, 4, 8), (2, 4, 6) # Diagonal
+        (0, 1, 2), (3, 4, 5), (6, 7, 8),    # Horizontal
+        (0, 3, 6), (1, 4, 7), (2, 5, 8),    # Vertical
+        (0, 4, 8), (2, 4, 6)                # Diagonal
     ]
     for cond in win_conditions:
         if board[cond[0]] == board[cond[1]] == board[cond[2]] == symbol:
@@ -115,3 +115,5 @@ def tic_tac_toe():
 
 if __name__ == "__main__":
     tic_tac_toe()
+
+
