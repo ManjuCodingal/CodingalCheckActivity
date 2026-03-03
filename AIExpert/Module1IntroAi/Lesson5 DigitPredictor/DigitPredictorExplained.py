@@ -1,3 +1,13 @@
+# NOTE: I did this activity in google colab. 
+# Google Colab (Easier for AI / ML)
+# ✅ Advantages:
+# No installation needed
+# TensorFlow already installed
+# Free GPU support
+# Runs in browser
+# Very good for ML projects
+# For MNIST code, Colab is the easiest option.
+
 # Basic handwritten digit predictor using TensorFlow and Keras
 import tensorflow as tf # import tensorflow library. It is a popular open-source library for machine learning and deep learning developed by Google. It provides tools and resources for building and training machine learning models, including neural networks, and is widely used in both research and industry for various applications such as image recognition, natural language processing, and more.
 from tensorflow.keras import layers, models # imports the layers and models modules from the Keras, which is TensorFlow's high-level neural networks API for building neural networks.
