@@ -1,0 +1,9 @@
+to add 2 numbers entered by user
+
+step 1:start
+step 2: declare variables num1 and num2 and declare sum
+step 3:read values of num1 and num2
+step 4: Add num1 and num2 and save results to sum.
+       Sum= num1+ num2
+step 5:display the sum
+step 6 : Stop
