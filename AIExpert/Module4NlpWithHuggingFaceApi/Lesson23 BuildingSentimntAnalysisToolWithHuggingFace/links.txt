@@ -1,0 +1,5 @@
+• Sentence Transformers Documentation: https://www.sbert.net/
+
+• MiniLM Model Page: https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2
+
+• Hugging Face Inference API: https://huggingface.co/docs/api-inference/

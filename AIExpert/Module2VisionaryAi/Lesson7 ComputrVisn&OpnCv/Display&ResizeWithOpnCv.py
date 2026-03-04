@@ -1,6 +1,7 @@
+# pip install opencv-python - for windows 
+# pip3 install opencv-python - for mac
+
 import cv2
-
-
 
 # Load the image
 
