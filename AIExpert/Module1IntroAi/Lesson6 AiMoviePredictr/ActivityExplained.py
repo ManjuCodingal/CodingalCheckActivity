@@ -2,6 +2,10 @@
 
 # Pandas is used to read csv file and filter data based on Genre and IMDB_Rating. TextBlob is used to analyze the sentiment of movie overviews to determine if they are positive, negative, or neutral. Colorama is used to add colored text output for better user experience in the terminal.
 
+# pip install panadas
+# pip install textblob
+# pip install colorama
+
 import time, pandas as pd
 from textblob import TextBlob
 from colorama import init, Fore
