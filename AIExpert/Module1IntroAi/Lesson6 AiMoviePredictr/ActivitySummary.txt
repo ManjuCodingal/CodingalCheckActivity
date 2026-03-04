@@ -1,0 +1,22 @@
+High-level flow (pseudo-steps):
+1) Load dataset -> extract genres
+2) Ask user for name, genre, mood, optional rating
+3) Analyze mood polarity (TextBlob)
+4) Recommend movies (filter + shuffle + overview sentiment check)
+5) Display results
+6) Loop for more recommendations until user says "no"
+
+Purpose :
+To explain the complete end-to-end flow of how the Movie Recommendation Assistant works from user input to final recommendations.
+
+Explanation :
+The program starts by importing libraries and loading the imdb_top_1000.csv dataset; if the file is missing, it exits with an error message. It then extracts a clean list of unique genres so the user can choose valid options. Next, the assistant greets the user, takes their name, asks them to select a genre, and collects a mood sentence, which is analyzed using TextBlob to calculate a polarity score and classify the mood as positive, negative, or neutral. After that, the user can optionally enter a minimum IMDB rating (or skip it). The recommendation function applies the selected genre filter, rating filter, shuffles the remaining movies for variety, and checks each movie’s overview polarity to pick suitable results (currently keeping neutral/positive overview movies when mood is provided). The recommendations are then displayed in a formatted list with polarity and sentiment labels. Finally, the program runs in a loop asking if the user wants more recommendations, and it repeats the recommendation step until the user answers “no.”
+
+• Loads the dataset and exits safely if the CSV file is missing
+• Extracts and displays unique genres for valid user selection
+• Takes user inputs: name, genre, mood, and optional minimum rating
+• Analyzes mood using sentiment polarity and prints the mood result
+• Filters movies by genre and rating, then shuffles for fresh results each run
+• Uses overview sentiment polarity to decide which movies to recommend
+• Displays recommendations with polarity score and sentiment label
+• Repeats recommendations in a loop until the user chooses to stop

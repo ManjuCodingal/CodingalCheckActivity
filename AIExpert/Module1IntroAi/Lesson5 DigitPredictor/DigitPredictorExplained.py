@@ -8,7 +8,47 @@
 # Very good for ML projects
 # For MNIST code, Colab is the easiest option.
 
-# Basic handwritten digit predictor using TensorFlow and Keras
+# LAYERS IN NEURAL NETWORKS:: layers are structured groups of neurons (also called nodes) that process information step by step. Each layer transforms the input data into a more useful representation.
+# 🔹 The Main Types of Layers
+# 1️⃣ Input Layer
+# This is where data enters the network.
+# Each neuron represents one feature of the input.
+# Example: For an image of 28×28 pixels, the input layer may have 784 neurons (one per pixel).
+# 👉 The input layer doesn’t process data — it simply passes it forward.
+
+# 2️⃣ Hidden Layers
+# These sit between input and output layers.
+ 
+# Hidden layers extract patterns:
+# Early layers → simple features (edges in images)
+# Middle layers → combinations of features
+# Deep layers → complex patterns (faces, objects, meaning in text)
+# 👉 The more hidden layers a network has, the “deeper” it is (hence deep learning).
+
+# 3️⃣ Output Layer
+# Produces the final prediction.
+
+# Structure depends on the task:
+# Regression → 1 neuron
+# Binary classification → 1 neuron (often sigmoid)
+# Multi-class classification → multiple neurons (often softmax)
+
+# 🔹 Why Layers Matter
+# Layers allow the network to:
+# Learn hierarchical representations
+# Break complex problems into smaller transformations
+# Gradually convert raw data into meaningful output
+
+# 🔹 Simple Analogy
+# Imagine recognizing a face:
+# Input layer → Raw pixels
+# Hidden layer 1 → Detect edges
+# Hidden layer 2 → Detect shapes
+# Hidden layer 3 → Detect facial features
+# Output layer → “This is John”
+# Each layer builds on the previous one.
+
+# ACTIVITY:: Basic handwritten digit predictor using TensorFlow and Keras
 import tensorflow as tf # import tensorflow library. It is a popular open-source library for machine learning and deep learning developed by Google. It provides tools and resources for building and training machine learning models, including neural networks, and is widely used in both research and industry for various applications such as image recognition, natural language processing, and more.
 from tensorflow.keras import layers, models # imports the layers and models modules from the Keras, which is TensorFlow's high-level neural networks API for building neural networks.
 # The layers module provides various types of layers (e.g., Dense, Flatten) that can be used to build neural network architectures, while the models module allows you to create and manage the overall structure of your neural network model.

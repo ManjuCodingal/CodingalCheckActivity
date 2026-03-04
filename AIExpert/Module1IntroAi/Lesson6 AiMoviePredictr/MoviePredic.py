@@ -1,3 +1,5 @@
+# Analyse mood and recommend movies based on genre, mood, and rating using TextBlob for sentiment analysis and pandas for data handling.
+
 import time, pandas as pd
 from textblob import TextBlob
 from colorama import init, Fore
