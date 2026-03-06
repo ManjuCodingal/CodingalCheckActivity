@@ -8,3 +8,11 @@ for i in range(n):
       #display result
         print("* ", end="")
     print()
+
+# Output: Half Pyramid Pattern of Stars (*):
+# enter the number of rows: 5
+# * 
+# * *
+# * * *
+# * * * *
+# * * * * *

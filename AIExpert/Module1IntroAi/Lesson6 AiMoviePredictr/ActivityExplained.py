@@ -22,10 +22,11 @@ try: df = pd.read_csv("imdb_top_1000.csv") # loads dataset into a DataFrame name
 except FileNotFoundError:
     print(Fore.RED + "Error: The file 'imdb_top_1000.csv' was not found."); raise SystemExit # raise SystemExit is used to exit the program gracefully after printing the error message in red color using Colorama. This prevents further execution of the program when the required dataset file is missing, which would otherwise lead to errors later on when trying to access the data.
 
-genres = sorted({g.strip() for xs in df["Genre"].dropna().str.split(", ") for g in xs}) # dropna() removes any missing values from the Genre column, str.split(", ") splits the genre string into a list of genres, and the set comprehension creates a unique set of genres by stripping whitespace. Finally, sorted() sorts the genres alphabetically for better user experience when displaying options. This allows the program to present a clean and organized list of genres for the user to choose from when requesting movie recommendations. 
+genres = sorted({g.strip() for xs in df["Genre"].dropna().str.split(", ") for g in xs}) # xs is just a temporary variable name used in the set comprehension. It represents each list of genres obtained after splitting the string.
+ # dropna() removes any missing values from the Genre column, str.split(", ") splits the genre string into a list of genres, and the set comprehension creates a unique set of genres by stripping whitespace. Finally, sorted() sorts the genres alphabetically for better user experience when displaying options. This allows the program to present a clean and organized list of genres for the user to choose from when requesting movie recommendations. 
 
 def dots(): # for short animated '...' effect to simulate AI thinking. It denotes a pause in the program to enhance user experience by making it feel more interactive and engaging.
-    for _ in range(3): print(Fore.YELLOW + ".", end="", flush=True); time.sleep(0.5) # end="" keeps the dots on the same line, flush=True ensures they appear immediately, and time.sleep(0.5) creates a half-second delay between each dot for a simple animation effect.
+    for _ in range(3): print(Fore.YELLOW + ".", end="", flush=True); time.sleep(0.5) # end="" keeps the dots on the same line, flush=True ensures they appear immediately, and time.sleep(0.5) creates a half-second delay between each dot for a simple animation effect. 0.5 seconds is chosen to create a noticeable but not too long pause, making the AI feel like it's "thinking" without causing user frustration. Adjusting the sleep duration can make the effect faster or slower based on user preference.
 
 def senti(p): return "Positive 😊" if p > 0 else "Negative 😞" if p < 0 else "Neutral 😐"
 
@@ -33,15 +34,24 @@ def recommend(genre=None, mood=None, rating=None, n=5): # This filters movies by
     d = df
     # If genre is provided, it keeps only movies whose Genre text contains that genre (case-insensitive) and ignores missing genre values safely.
     if genre: d = d[d["Genre"].str.contains(genre, case=False, na=False)] # case=False makes genre matching case-insensitive (Drama matches drama)
-    # na=False prevents errors when Genre has missing values
+    # na=False prevents errors when Genre has missing values. na means "not available" and is used to handle missing data in the Genre column. By setting na=False, the str.contains() method will return False for any rows where the Genre value is missing (NaN), effectively excluding those rows from the filtered results without causing an error. This allows the program to continue functioning smoothly even if some movies in the dataset do not have genre information.
 
     # If rating is provided, it keeps only movies whose IMDB_Rating meets or exceeds the threshold.
     if rating is not None: d = d[d["IMDB_Rating"] >= rating]
     # If filtering removes everything, it returns a clear message instead of failing.
     if d.empty: return "No suitable movie recommendations found." # d.empty avoids running sentiment scoring when no movies remain
 
+# Why shuffle movies?
+# The remaining movies are shuffled using sample(frac=1) so users get variety on repeated runs. This prevents the same top movies from always appearing first and allows users to discover different movies that match their preferences each time they ask for recommendations. By shuffling the order of the movies, it creates a more dynamic and engaging experience, encouraging users to explore a wider range of options rather than just the highest-rated ones that would appear at the top of the list every time.
     # The remaining movies are shuffled using sample(frac=1) so users get variety on repeated runs.
-    d, need_nonneg, out = d.sample(frac=1).reset_index(drop=True), bool(mood), [] # sample(frac=1) shuffles rows; frac=1 means shuffle 100% of the rows
+    d, need_nonneg, out = d.sample(frac=1).reset_index(drop=True), bool(mood), []
+    # frac is a parameter in sample() from pandas that specifies the fraction (percentage) of rows to return from the DataFrame.
+
+# frac=1
+# frac=1 means:
+# Take 100% of the rows but shuffle them randomly.
+# So this line is commonly used to shuffle the DataFrame.
+     # sample(frac=1) shuffles rows; frac=1 means shuffle 100% of the rows
     # reset_index(drop=True) cleans the index after shuffling for smooth iteration
     
     # Then the function loops through the shuffled list, extracts the Overview, skips missing overviews, computes sentiment polarity using TextBlob, and applies a simple mood rule: when mood is provided, it allows only movies whose overview polarity is neutral/positive (pol >= 0). It collects up to n movies and returns them as a list of (title, polarity) tuples.
@@ -49,6 +59,7 @@ def recommend(genre=None, mood=None, rating=None, n=5): # This filters movies by
         ov = r.get("Overview")
         if pd.isna(ov): continue
         pol = TextBlob(ov).sentiment.polarity 
+        # isna() is a function in pandas that checks whether a value is missing (NaN / null).
 # • iterrows() loops row-by-row; simple for beginners but slower for huge datasets
 # • r.get("Overview") safely accesses overview text even if a column is missing
 # • pd.isna(ov) skips movies without overviews so polarity calculation does not break

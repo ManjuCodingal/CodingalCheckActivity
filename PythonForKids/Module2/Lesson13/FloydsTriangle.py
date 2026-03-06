@@ -11,3 +11,20 @@ for i in range(1, rows + 1):
         print(number, end = '  ')
         number = number + 1
     print()
+
+# Output: Floyd's Triangle
+# Please Enter the total Number of Rows  : 3    
+# Floyd's Triangle  
+# Please Enter the total Number of Rows  : 4
+# Floyd's Triangle
+# 1  
+# 2  3  
+# 4  5  6  
+# 7  8  9  10  
+
+
+# Row(i)  	range(1,i+1)	Numbers printed
+# 1        	1     	      1
+# 2	        2,3	          2 numbers
+# 3	        4,5,6	        3 numbers
+# 4      	  7,8,9,10     	4 numbers
