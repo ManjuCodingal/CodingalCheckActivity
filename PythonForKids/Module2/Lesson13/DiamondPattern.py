@@ -32,7 +32,7 @@ for i in range(1, halfDiamRow+1):
   space = space-1
   num = 1
   # Inner for loop 2 purpose: to print numbers in each row
-  for j in range(2*i-1):
+  for j in range(2*i-1): # 2*i-1 is used to get the number of columns in each row. Eg. if i is 1 then 2*1-1 is 1, if i is 2 then 2*2-1 is 3, if i is 3 then 2*3-1 is 5 and so on. So, the number of columns in each row will be 1, 3, 5 and so on.
     print(end=str(num))
   #incerementing number at each column
     num = num+1
@@ -49,7 +49,7 @@ for i in range(1, halfDiamRow):
     print(end=" ")
   space = space+1
   num = 1
-  for j in range(1, 2*(halfDiamRow-i)): # inner for loop 2 purpose: to print numbers
+  for j in range(1, 2*(halfDiamRow-i)): # inner for loop 2 purpose: to print numbers. Eg. if halfDiamRow is 3 and i is 1 then 2*(3-1) is 4, if halfDiamRow is 3 and i is 2 then 2*(3-2) is 2 and so on. So, the number of columns in each row will be 4, 2 and so on.
     print(end=str(num)) #display result
   #incerementing number at each column
     num = num+1

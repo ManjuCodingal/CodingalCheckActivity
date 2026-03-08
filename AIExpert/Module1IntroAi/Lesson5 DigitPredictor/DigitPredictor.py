@@ -1,6 +1,7 @@
 import tensorflow as tf
 from tensorflow.keras import layers, models
 import matplotlib.pyplot as plt
+# https://colab.research.google.com/drive/1PXAD79p3af9DbTEzl4E1vKg3b-kvRQTR#scrollTo=3OYL8WmP27eR
 
 # Load MNIST dataset
 (x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data()

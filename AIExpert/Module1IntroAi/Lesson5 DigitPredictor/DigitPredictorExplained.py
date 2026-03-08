@@ -1,4 +1,5 @@
 # NOTE: I did this activity in google colab. 
+# https://colab.research.google.com/drive/1PXAD79p3af9DbTEzl4E1vKg3b-kvRQTR#scrollTo=3OYL8WmP27eR
 # Google Colab (Easier for AI / ML)
 # ✅ Advantages:
 # No installation needed
