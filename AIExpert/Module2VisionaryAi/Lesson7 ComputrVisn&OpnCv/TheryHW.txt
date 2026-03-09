@@ -1,0 +1,68 @@
+Numpy? Numpy in openCv, cv2?
+Numpy = Numerical Python
+NumPy is a Python library used for numerical computing and working with arrays (matrices).
+It is mainly used for:
+Fast mathematical operations
+Handling large datasets
+Working with multi-dimensional arrays
+👉 NumPy = Library for working with arrays and numbers efficiently in Python.
+
+image = cv2.imread('dogImage.jpg')
+the variable image is actually a NumPy array.
+
+OpenCV uses NumPy to:
+Store image data
+Manipulate pixels
+Perform mathematical operations on images
+
+How an Image is Stored Using NumPy
+A digital image is a grid of pixels.
+Each pixel contains color values.
+
+Why NumPy is Powerful in Image Processing
+NumPy allows:
+✔ Fast pixel operations
+✔ Image transformations
+✔ Mathematical operations on images
+✔ Filtering and masking
+
+=================================================================================
+
+Why image rezised, converted to grayscale?
+
+| Operation | Why we do it                                        |
+| --------- | --------------------------------------------------- |
+| Resize    | Reduce size, speed up processing, match model input |
+| Grayscale | Reduce data, simplify image, faster algorithms      |
+
+
+What is Grayscale?
+Grayscale means an image that contains only shades of gray, from black to white, without any color.
+Instead of color information, each pixel represents brightness (intensity).
+
+Pixel values in Grayscale
+In a grayscale image, each pixel has one value:
+
+Value	Meaning
+0	Black
+128	Medium gray
+255	White
+
+| Image Type      | Channels    | Example Pixel  |
+| --------------- | ----------- | -------------- |
+| Color Image     | 3 (B, G, R) | [120, 60, 200] |
+| Grayscale Image | 1           | 140            |
+
+So grayscale images contain less data and are simpler.
+
+Why Grayscale is Used
+Grayscale is commonly used because:
+⚡ Faster processing
+📉 Less memory usage
+🔍 Better for detecting edges and shapes
+
+Applications include:
+Face detection
+OCR (text recognition)
+Medical imaging
+Security cameras
