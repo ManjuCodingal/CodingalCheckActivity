@@ -1,0 +1,75 @@
+| Library            | Color Format |
+| ------------------ | ------------ |
+| OpenCV             | BGR          |
+| Matplotlib         | RGB          |
+| Most image systems | RGB          |
+
+OpenCV uses BGR because of historical compatibility with older image formats and systems, while modern AI and visualization libraries use RGB.
+
+For AI / Machine Learning systems, the most commonly used format is RGB, but it depends on the task. Here's the typical usage:
+
+1. RGB (Most common in AI)
+RGB (Red, Green, Blue) is widely used in AI models that work with color images.
+Used in:
+Image classification
+Object detection
+Image segmentation
+Generative models
+
+Examples of AI frameworks that typically expect RGB images:
+TensorFlow
+PyTorch
+
+Datasets like ImageNet also store images in RGB format.
+Example tensor shape:
+(H, W, 3)   # Height, Width, RGB channels
+2. Grayscale (Used in simpler tasks)
+
+Grayscale images are used when color information is not necessary.
+Common in:
+Digit recognition
+Medical imaging
+Edge detection
+OCR
+
+Example dataset:
+MNIST (handwritten digits)
+Tensor shape:
+(H, W, 1)
+
+Advantages:
+Less memory
+Faster training
+Simpler models
+
+3. BGR (Rare in AI pipelines)
+BGR is mostly used only inside OpenCV for image processing.
+In most AI pipelines:
+Images are converted from BGR → RGB before feeding into the model.
+
+✅ Summary
+Format	Usage in AI
+RGB	⭐ Most common
+Grayscale	Used when color isn't needed
+BGR	Mostly OpenCV internal format
+
+✔ Final answer:
+AI models usually use RGB, sometimes grayscale, and rarely BGR (except during preprocessing with OpenCV).
+=====================================================
+
+If you display a BGR image as RGB, the colors look incorrect.
+| Actual Color | BGR interpreted as RGB looks like |
+| ------------ | --------------------------------- |
+| Red          | Blue                              |
+| Blue         | Red                               |
+| Yellow       | Cyan-ish                          |
+| Purple       | Green-ish                         |
+
+BGR pixel: [255, 0, 0]
+RGB pixel: Red = 255, Green = 0, Blue = 0
+A grayscale pixel is a single number between 0 and 255 (in 8-bit images).
+
+You cannot visually detect BGR vs RGB if:
+The image is grayscale
+The colors are very neutral
+You convert correctly before displaying
