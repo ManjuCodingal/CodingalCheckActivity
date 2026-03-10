@@ -1,3 +1,4 @@
+# pip install matplotlib
 import cv2
 import matplotlib.pyplot as plt # import pyplot for displaying images, pyplot is a module in the matplotlib library that provides a collection of functions for creating static, animated, and interactive visualizations in Python.
 
@@ -8,7 +9,7 @@ image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 plt.imshow(image_rgb) # Note: OpenCV uses BGR format, so we need to convert it to RGB for displaying with matplotlib
 # NOTE:: image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB):- This does not change the colors of the real image, it only reorders the channels so that Matplotlib displays it correctly. SO there will be no visual change between the original example.jpg and the RGB image you display
 plt.title("RGB Image")
-plt.show()
+plt.show() # This line displays the image in a window. plt.show() is used to display the figure that has been created. It is necessary to call this function to actually render the image on the screen. Without plt.show(), the image will not be displayed, and you won't see any output.
 
  # NOTE:: IF WE WANT TO WRONGLY VISUALISE THE IMAGE AS BGR. Colors will look incorrect (e.g., blues and reds will be swapped). Bcz openCV reads the image in BGR format, but matplotlib displays it as if it were in RGB format. So the colors will look incorrect because the blue and red channels are swapped. FOR WRONG IMAGE, use code below:-
 # plt.imshow(image)  
