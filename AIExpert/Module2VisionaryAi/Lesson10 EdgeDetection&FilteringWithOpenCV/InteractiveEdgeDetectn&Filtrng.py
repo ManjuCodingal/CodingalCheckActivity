@@ -2,6 +2,9 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
+# import os
+# print(os.getcwd(),'FldrIss')  # prints current working directory
+
 def display_image(title, image):
     """Utility function to display an image."""
     plt.figure(figsize=(8, 8))
@@ -78,4 +81,5 @@ def interactive_edge_detection(image_path):
             print("Invalid choice. Please select a number between 1 and 6.")
 
 # Provide the path to an image for the activity
-interactive_edge_detection('example.jpg')
+# interactive_edge_detection('example.jpg')
+interactive_edge_detection('AIExpert/Module2VisionaryAi/Lesson10 EdgeDetection&FilteringWithOpenCV/example.jpg')
