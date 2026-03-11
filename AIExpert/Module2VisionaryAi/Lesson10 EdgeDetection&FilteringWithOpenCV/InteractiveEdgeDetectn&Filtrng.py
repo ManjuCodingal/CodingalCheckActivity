@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 # print(os.getcwd(),'FldrIss')  # prints current working directory
 
 def display_image(title, image):
-    """Utility function to display an image."""
+    # function to display an image 
     plt.figure(figsize=(8, 8))
     if len(image.shape) == 2:  # Grayscale image
         plt.imshow(image, cmap='gray')
@@ -17,7 +17,7 @@ def display_image(title, image):
     plt.show()
 
 def interactive_edge_detection(image_path):
-    """Interactive activity for edge detection and filtering."""
+    #  Interactive activity for edge detection and filtering. 
     image = cv2.imread(image_path)
     if image is None:
         print("Error: Image not found!")
@@ -47,7 +47,7 @@ def interactive_edge_detection(image_path):
 
         elif choice == "2":
             # Canny Edge Detection
-            print("Adjust thresholds for Canny (default: 100 and 200)")
+            print("Adjust thresholds for Canny")
             lower_thresh = int(input("Enter Lower threshold: "))
             upper_thresh = int(input("Enter Upper threshold: "))
             edges = cv2.Canny(gray_image, lower_thresh, upper_thresh)
@@ -60,14 +60,14 @@ def interactive_edge_detection(image_path):
 
         elif choice == "4":
             # Gaussian Smoothing
-            print("Adjust kernel size for Gaussian blur (must be odd, default: 5)")
+            print("Adjust kernel size for Gaussian blur (must be odd)")
             kernel_size = int(input("Enter kernel size (odd number): "))
             blurred = cv2.GaussianBlur(image, (kernel_size, kernel_size), 0)
             display_image("Gaussian Smoothed Image", blurred)
 
         elif choice == "5":
             # Median Filtering
-            print("Adjust kernel size for Median filtering (must be odd, default: 5)")
+            print("Adjust kernel size for Median filtering (must be odd)")
             kernel_size = int(input("Enter kernel size (odd number): "))
             median_filtered = cv2.medianBlur(image, kernel_size)
             display_image("Median Filtered Image", median_filtered)

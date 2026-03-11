@@ -1,0 +1,195 @@
+- Edge detection techniques: Sobel, Canny, Laplacian
+- Filtering technique for noise reduction: Gaussian, median
+
+These algorithms are usually applied to a grayscale version of the image.
+
+| Method    | Grayscale Required? | RGB Possible?     |
+| --------- | ------------------- | ----------------- |
+| Sobel     | Usually             | Yes (per channel) |
+| Canny     | Usually required    | Rare              |
+| Laplacian | Usually             | Yes (per channel) |
+| Gaussian  | No                  | Yes               |
+| Median    | No                  | Yes               |
+
+
+🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂 
+
+Sobel (detects changes in brightness → highlights edges)
+
+Use case:
+Detect object boundaries
+Highlight vertical/horizontal lines in images
+Preprocessing step before computer vision tasks like object detection
+
+Sobel in X direction
+sobel_x = cv2.Sobel(gray_image, cv2.CV_64F, 1, 0, ksize=3)
+gray_image → input grayscale image
+cv2.CV_64F → depth of output image (use float to handle negative gradients)
+1, 0 → compute derivative in x-direction only (detects vertical edges)
+ksize=3 → size of the Sobel kernel (3×3)
+✅ This gives edges where brightness changes left to right.
+
+Sobel in Y direction
+sobel_y = cv2.Sobel(gray_image, cv2.CV_64F, 0, 1, ksize=3)
+0, 1 → derivative in y-direction only (detects horizontal edges)
+ksize=3 → kernel size
+✅ Detects edges where brightness changes top to bottom.
+
+Combine Sobel X and Y
+combined_sobel = cv2.bitwise_or(sobel_x.astype(np.uint8), sobel_y.astype(np.uint8))
+sobel_x.astype(np.uint8) → convert float image to 8-bit integer so OpenCV can display it
+cv2.bitwise_or() → combines two images: any pixel that is an edge in either sobel_x or sobel_y will appear in the output
+✅ So the result highlights all edges in both directions.
+
+| Variable         | What it detects    |
+| ---------------- | ------------------ |
+| `sobel_x`        | Vertical edges     |
+| `sobel_y`        | Horizontal edges   |
+| `combined_sobel` | All edges (X OR Y) |
+
+
+(Direction of derivative means --> way we are measuring the change in brightness)
+| Sobel | Direction of derivative | Edge detected    |
+| ----- | ----------------------- | ---------------- |
+| X     | Left → Right            | Vertical edges   |
+| Y     | Top → Bottom            | Horizontal edges |
+
+🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂 
+
+1️⃣ What Canny Edge Detection Does
+Canny is a popular edge detection method. It detects sharp changes in brightness in an image (edges) but uses two thresholds to decide which edges are strong, weak, or ignored.
+
+Steps inside Canny:
+Noise reduction (usually Gaussian blur)
+Find intensity gradients (like Sobel derivatives)
+Non-maximum suppression → keep only the sharpest edges
+Hysteresis thresholding → keep edges based on two thresholds
+
+How it works (Hysteresis):
+- Pixels with gradient ≥ upper_thresh → strong edge → always kept
+- Pixels with gradient < lower_thresh → not an edge → discarded
+- Pixels with gradient between lower and upper thresholds → weak edge → kept only if connected to strong edge
+This prevents noisy edges and keeps real edges more reliable.
+
+Typical default values: lower = 100, upper = 200
+
+Use case:
+Accurate edge detection
+Used in computer vision tasks like lane detection in self-driving cars
+
+🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂
+
+1️⃣ What Laplacian does
+The Laplacian operator is used for edge detection.
+highlights sharp changes in edges → sharp edges, corners
+(It calculates the second derivative of the image.)
+
+Use case:
+Detect corners and sharp changes in images
+Works when you need direction-independent edge detection
+
+laplacian = cv2.Laplacian(gray_image, cv2.CV_64F)
+gray_image → input image (grayscale)
+🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂 
+
+What Gaussian Smoothing (Blur) Does
+Gaussian smoothing is a type of image blur.
+It reduces noise and small variations in the image.
+Works by averaging pixel values weighted by a Gaussian function.
+Result → edges are still visible, but fine details and noise are smoothed.
+
+Use case:
+Preprocessing before edge detection (reduces false edges)
+Softens images
+Used in image filtering, background blurring, and artistic effects
+
+Parameters of cv2.GaussianBlur
+cv2.GaussianBlur(src, ksize, sigmaX)
+| Parameter | Meaning                                                                  |
+| --------- | ------------------------------------------------------------------------ |
+| `src`     | Input image (color or grayscale)                                         |
+| `ksize`   | Kernel size → a tuple `(width, height)` (must be **odd numbers**)        |
+| `sigmaX`  | Standard deviation in X direction. `0` → OpenCV calculates automatically |
+
+If kernel_size = 5 → kernel = 5×5
+Larger kernel → more blur
+Smaller kernel → less blur
+
+Why Kernel Size Must Be Odd
+Kernel has a center pixel.
+Example: 3×3 kernel → center is pixel (1,1)
+Even numbers → no exact center → OpenCV cannot compute proper Gaussian blur
+✅ So you always use odd numbers: 3, 5, 7, 9, etc
+
+| kernel_size | Effect                               |
+| ----------- | ------------------------------------ |
+| 3           | Slight blur, small noise removed     |
+| 5           | Medium blur, edges slightly softened |
+| 9           | Strong blur, image looks very smooth |
+
+| Kernel Size         | Effect on Image                                                                                |
+| ------------------- | ---------------------------------------------------------------------------------------------- |
+| Small (3×3)         | Slight blur → only small noise or sharp details are softened. The image mostly looks the same. |
+| Medium (5×5 or 7×7) | Moderate blur → edges are smoother, fine details are lost.                                     |
+| Large (9×9 or more) | Strong blur → image looks very smooth, edges are soft, and details are heavily blurred.        |
+
+Visual Analogy
+Think of the image as a sharp photograph:
+Small kernel → like gently smudging it
+Large kernel → like painting over it with a soft brush, losing more details
+
+🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂 
+
+What Median Filtering Does
+
+Median filter is used for removing noise from an image, especially salt-and-pepper noise (random black or white pixels).
+Works by replacing each pixel with the median value of its neighbors in a square window (kernel).
+Unlike Gaussian blur, which averages, median filtering takes the middle value, which preserves edges better.
+
+Effect: Removes salt-and-pepper (black,white dots) noise better than Gaussian blur
+Use case:
+Denoising images while preserving edges
+Good for images with random noise, like scanned documents or camera sensor noise
+
+cv2.medianBlur(src, ksize)
+| Parameter | Meaning                                     |
+| --------- | ------------------------------------------- |
+| `src`     | Input image (color or grayscale)            |
+| `ksize`   | Size of the square kernel (must be **odd**) |
+
+Why Kernel Size Must Be Odd
+Median filter needs a center pixel.
+Odd numbers (3, 5, 7, …) ensure there is a middle pixel to pick the median.
+Even numbers would have no exact middle, so OpenCV does not allow them.
+
+| Kernel Size | Effect                                          |
+| ----------- | ----------------------------------------------- |
+| 3           | Small noise removed                             |
+| 5           | Moderate noise removed                          |
+| 9           | Stronger noise removal, edges slightly affected |
+
+🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂 
+
+💡 Key Difference b/w Gaussian Blur & Median Filter
+| Filter Type   | How it works        | Edge Preservation |
+| ------------- | ------------------- | ----------------- |
+| Gaussian Blur | Weighted average    | Softens edges(less sharp)|
+| Median Filter | Median of neighbors | Keeps edges sharp |
+
+🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂 
+
+| Operator  | Output type                             | Why it looks light/dark                                   |
+| --------- | --------------------------------------- | --------------------------------------------------------- |
+| Sobel     | Gradient image (0-255, sometimes float) | High gradient values along edges → brighter lines         |
+| Canny     | Binary image (0 or 255)                 | Most pixels are 0 → dark background, only edges are white |
+| Laplacian | Second derivative (0-255 after abs)     | Only sharp changes → edges bright, rest dark              |
+
+🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂
+
+| Method        | Purpose                     | Key Feature                                |
+| ------------- | --------------------------- | ------------------------------------------ |
+| Sobel         | Edge detection              | Directional (X/Y)                          |
+| Laplacian     | Edge detection              | Direction-independent                      |
+| Canny         | Edge detection              | Strong, thin edges, noise-resistant        |
+| Gaussian Blur | Smoothing / Noise reduction | Softens image, reduces noise               |
+| Median Filter | Denoising                   | Removes salt-pepper noise, preserves edges |
