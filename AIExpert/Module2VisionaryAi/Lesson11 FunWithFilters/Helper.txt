@@ -1,0 +1,56 @@
+* Checking output of the activity::
+OpenCV only detects key presses when the image window is active.
+✔ After the image appears:
+Click on the "Filtered Image" window in output. Then press r, b, g, i, d, q
+( Key press is not given in the terminal. The image window should be focused and then do the key press, openCv will detect the key.)
+
+🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂 
+For BGR format, (as used in open cv)
+| Index | Color |
+| ----- | ----- |
+| 0     | Blue  |
+| 1     | Green |
+| 2     | Red   |
+BGR format: Blue=0 index, Green=1 index, Red=2 index
+
+
+☑️ ️if filter_type == "red_tint":
+filtered_image[:, :, 1] = 0  # Green channel made 0 → 0
+filtered_image[:, :, 0] = 0  # Blue channel made 0 → 0, so now only red channel appears
+
+Shortcut Example with an Image of 3×3 Pixels
+Original small image (BGR):
+[
+  [[255, 100, 50], [0, 200, 100], [50, 50, 255]],
+  [[10, 20, 30], [60, 70, 80], [90, 100, 110]],
+  [[200, 150, 100], [25, 50, 75], [0, 0, 0]]
+]
+
+After applying red_tint (B=0, G=0):
+[
+  [[0, 0, 50], [0, 0, 100], [0, 0, 255]],
+  [[0, 0, 30], [0, 0, 80], [0, 0, 110]],
+  [[0, 0, 100], [0, 0, 75], [0, 0, 0]]
+]
+
+Only the red values are left → image looks reddish.
+
+🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂 
+
+1️⃣ How OpenCV Handles Colors
+
+OpenCV images are usually stored as 8-bit unsigned integers (uint8).
+
+Each color channel (Blue, Green, Red) can only have values from 0 to 255.
+
+| Min | Max |
+| --- | --- |
+| 0   | 255 |
+
+0 → no intensity, 255 → full intensity
+
+filtered_image[:, :, 2] = cv2.add(filtered_image[:, :, 2], 50)  --> implies increase intensity of red channel by 50
+# Suppose red value = 200
+cv2.add(200, 50)   # 250 ✅ not clipped
+cv2.add(200, 100)  # 255 ✅ (clipped)
+cv2.add(200, 5000) # 255 ✅ (still clipped)
