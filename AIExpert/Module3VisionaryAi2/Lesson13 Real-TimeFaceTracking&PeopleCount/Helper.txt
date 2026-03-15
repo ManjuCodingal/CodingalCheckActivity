@@ -1,0 +1,38 @@
+face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml') # load the Haar Cascade XML file for frontal face detection from OpenCV's data directory.
+# data is a module (folder reference) inside OpenCV.
+# It contains paths to built-in datasets and files that come with OpenCV.
+# This gives the directory path where OpenCV stores Haar Cascade XML files.
+# So cv2.data simply helps Python find OpenCV’s internal data files.
+
+# haarcascades is a folder inside the OpenCV data directory.
+# This folder contains pre-trained Haar Cascade models used for detecting objects.
+
+# Examples of files inside it:
+# haarcascade_frontalface_default.xml
+# haarcascade_eye.xml
+# haarcascade_smile.xml
+# haarcascade_fullbody.xml
+# haarcascade_upperbody.xml
+
+| File                                  | Detects    |
+| ------------------------------------- | ---------- |
+| `haarcascade_frontalface_default.xml` | Faces      |
+| `haarcascade_eye.xml`                 | Eyes       |
+| `haarcascade_smile.xml`               | Smiles     |
+| `haarcascade_fullbody.xml`            | Human body |
+
+
+The XML file stores:
+Haar features
+training parameters
+detection stages
+These are learned from thousands of face images during training.
+
+What "frontalface" means
+"frontal face" means a face looking straight toward the camera.
+Example it detects:
+🙂 (front face)
+But it may fail for:
+side face
+tilted face
+partially covered face

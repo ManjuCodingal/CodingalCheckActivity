@@ -1,10 +1,10 @@
 import cv2
 
 # Load pre-trained Haar Cascade Classifier for face detection
-face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')  
 
 # Initialize video capture (use webcam)
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0) # start video capture from the default webcam (index 0)
 if not cap.isOpened():
     print("Error: Could not open webcam.")
     exit()
@@ -13,11 +13,12 @@ while True:
     # Capture frame-by-frame
     ret, frame = cap.read()
 
+# if frame capture was unsuccessful, print an error message and break the loop
     if not ret:
         print("Error: Failed to capture image")
         break
 
-    # Convert frame to grayscale
+    # Convert frame to grayscale (face detection works better in grayscale)
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     # Detect faces in the grayscale image
@@ -38,6 +39,6 @@ while True:
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
-# Release the webcam and close the window
+# Release the webcam capture and close the window (if any open window)
 cap.release()
 cv2.destroyAllWindows()
