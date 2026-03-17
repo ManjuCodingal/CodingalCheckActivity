@@ -99,7 +99,16 @@ while True:
 # Parameters:        
 # frame → the image where the rectangle is drawn
 # (x, y) → top-left corner of the rectangle
-# (x + w, y + h) → bottom-right corner
+# (x + w, y + h) → bottom-right corner. Why? Because w is the width of the face and h is the height, so adding w to x gives the x-coordinate of the right edge of the rectangle, and adding h to y gives the y-coordinate of the bottom edge of the rectangle.
+# 1️⃣ Image Coordinate System
+# In images, the origin (0,0) is at the top-left corner, not the bottom-left like in normal graphs.
+# (0,0) ───────────────→ x (right)
+#   │
+#   │
+#   │
+#   ↓
+#   y (down)
+
 # (255, 0, 0) → rectangle color (blue in BGR format)
 # 2 → thickness of the rectangle
 

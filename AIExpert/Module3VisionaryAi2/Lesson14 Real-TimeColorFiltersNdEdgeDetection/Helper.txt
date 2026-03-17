@@ -1,0 +1,127 @@
+Tint meaning?
+“Tint” means a lighter shade of a color, created by adding white to the original color. 🎨
+
+🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂 
+
+Sobel uses convolutional kernels to identify areas with high gradient values. Here convolutional kernel means?
+✅ Convolutional kernel = a small matrix used to scan an image and detect patterns (like edges) by performing mathematical operations.
+In the Sobel operator, a convolutional kernel is a small matrix (filter) that is applied to an image to extract features—specifically, to detect edges (areas with high gradient change).
+This comes from the idea of Convolution, which is widely used in Image Processing.
+
+1️⃣ What is a Convolutional Kernel?
+A convolutional kernel (also called a filter) is:
+A small grid of numbers that slides over an image and performs calculations to modify or analyze it.
+
+Example size:
+3 × 3 matrix
+
+2️⃣ Sobel Kernels (Example)
+The Sobel operator uses two kernels:
+
+Horizontal edge detector (Gx)
+-1   0   1
+-2   0   2
+-1   0   1
+Vertical edge detector (Gy)
+-1  -2  -1
+ 0   0   0
+ 1   2   1
+
+3️⃣ How the Kernel Works
+Place the kernel on a small part of the image.
+Multiply each kernel value with the corresponding pixel value.
+Add all results.
+Move (slide) the kernel to the next position.
+This process is called convolution.
+
+4️⃣ Why It Detects Edges
+Edges are places where pixel intensity changes sharply.
+
+The Sobel kernels:
+Highlight changes in horizontal direction (Gx)
+Highlight changes in vertical direction (Gy)
+Large output values = strong edges.
+
+🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂
+
+Canny edge detection is a multi step edge detection process that includes smoothing, gradient calcilation, non maximum suppression and edge tracing. What does smoothing, gradient calcilation, non maximum suppression and edge tracing means?
+
+The Canny Edge Detection works in multiple steps to detect clean and accurate edges in an image.
+
+1️⃣ Smoothing (Noise Reduction)
+Meaning:
+Removing noise (random variations) from the image before detecting edges.
+
+Why?
+Noise can create false edges, so we first smooth the image.
+
+How?
+Usually done using a Gaussian blur.
+
+👉 Think of it like:
+Slightly blurring the image so small unwanted details disappear.
+
+2️⃣ Gradient Calculation
+Meaning:
+Finding how much the brightness of pixels changes.
+This uses operators like the Sobel Operator.
+
+It calculates:
+Magnitude → how strong the edge is
+Direction → which way the edge is going
+
+👉 In simple words:
+It finds where edges exist and how strong they are.
+
+3️⃣ Non-Maximum Suppression (NMS)
+Meaning:
+Thinning the edges to make them sharp and thin (1-pixel wide).
+
+Problem before NMS:
+Edges are often thick and blurry.
+
+Solution:
+Keep only the strongest pixel in the edge direction and remove the others.
+
+👉 Think of it like:
+From a thick line, keep only the center line.
+
+4️⃣ Edge Tracing (Hysteresis Thresholding)
+Meaning:
+Deciding which edges are real and which are noise.
+
+Uses two thresholds:
+High threshold → strong edges (definitely edges)
+Low threshold → weak edges
+
+How it works:
+Strong edges → always kept
+
+Weak edges → kept only if connected to strong edges
+Others → removed
+
+👉 In simple words:
+Keeps important edges and removes weak, isolated ones.
+
+🔍 Full Flow Summary
+Image
+  ↓
+Smoothing → remove noise
+  ↓
+Gradient → detect edge strength & direction
+  ↓
+Non-Max Suppression → thin edges
+  ↓
+Edge Tracing → keep only real edges
+
+✅ Final Simple Explanation
+| Step                    | Meaning                       |
+| ----------------------- | ----------------------------- |
+| Smoothing               | Remove noise (blur image)     |
+| Gradient Calculation    | Find edges and their strength |
+| Non-Maximum Suppression | Make edges thin               |
+| Edge Tracing            | Keep only real edges          |
+
+
+✅ In one line:
+Canny edge detection cleans the image, finds edges, sharpens them, and keeps only the important ones.
