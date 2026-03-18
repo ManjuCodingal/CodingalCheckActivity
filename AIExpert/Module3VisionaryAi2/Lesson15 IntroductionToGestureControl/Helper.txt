@@ -1,0 +1,41 @@
+pip install mediapipe==0.10.5 opencv-python =>To install mediapipe (for hand tracking) and opencv (for webcam access and image display)
+pip install mediapipe =>To install mediapipe (for hand tracking)  
+
+!pip install mediapipe==0.10.32  - in colab
+
+👉 Gesture control = Using hand/body movements to give commands
+
+🧠 Examples
+✋ Moving your hand to control a game
+👆 Swiping in the air to change slides
+🤚 Showing a palm to pause a video
+👍 Thumbs up to like or confirm
+
+📱 Real-world uses
+Smartphones (air gestures)
+Gaming systems (like motion sensors)
+Smart TVs
+Virtual Reality (VR)
+
+Computer Vision projects (like your OpenCV work 👀)
+💡 In your context (AI/OpenCV)
+Gesture control usually means:
+Camera captures your hand
+Program detects gesture
+Performs action
+
+Example:
+✋ Open hand → Start
+✊ Closed fist → Stop
+👉 Pointing → Select
+🎯 Final Answer
+
+👉 Gesture control means: Controlling devices or software using hand or body movements instead of physical inputs
+🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂
+🎯 What is a framework?
+A framework is a pre-built structure (set of tools, libraries, and rules) that helps you develop applications faster and more easily.
+
+🧠 Simple definition
+👉 Framework = Ready-made foundation for building software
+
+Eg: React, MediaPipe, Tensorflow
