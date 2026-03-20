@@ -30,8 +30,8 @@ TH, IX = Hands.HandLandmark.THUMB_TIP, Hands.HandLandmark.INDEX_FINGER_TIP
 # Setting up system volume control using Pycaw
 try:
     dev = AudioUtilities.GetDefaultOutputDevice() if hasattr(AudioUtilities, "GetDefaultOutputDevice") else AudioUtilities.GetSpeakers()
-    volctl = dev.EndpointVolume.QueryInterface(IAudioEndpointVolume)
-    minv, maxv = volctl.GetVolumeRange()[:2]
+    volctl = dev.EndpointVolume.QueryInterface(IAudioEndpointVolume) # Interface Audio Endpoint Vol.  QueryInterface(IAudioEndpointVolume) used to supports volume controls like SetMasterVolumeLevel and GetVolumeRange.
+    minv, maxv = volctl.GetVolumeRange()[:2] # • minv, maxv = ...[:2] stores only the min and max volume bounds so you can later use np.interp(distance, [...], [minv, maxv]).
 except Exception as e:
     print(f"Pycaw error: {e}"); exit()
 # This block initializes Windows volume control using Pycaw, which is a Python wrapper around the Windows Core Audio APIs (COM interfaces). The first line chooses the best available way to get the default audio output device: if AudioUtilities has GetDefaultOutputDevice (some Pycaw versions do), it uses that; otherwise it falls back to AudioUtilities.GetSpeakers() (older/common method). Once a device object is obtained, dev.EndpointVolume gives access to the endpoint’s volume interface, but it must be converted into the specific COM interface type you need (IAudioEndpointVolume). That conversion is done using .QueryInterface(IAudioEndpointVolume), which returns volctl, the object that can actually read and set volume. volctl.GetVolumeRange() returns a tuple containing the minimum volume level, maximum volume level, and step size (in decibels). The slice [:2] picks only the first two values—minv and maxv—because those are what you need to map a gesture distance into the supported volume range. If anything fails (missing dependency, COM access error, incompatible Pycaw version, no audio device, permission issue), the code catches the exception, prints a clear error, and exits so the program doesn’t continue in a broken state.
@@ -62,7 +62,7 @@ WIN = "Hand Gesture Control"; cv2.namedWindow(WIN, cv2.WINDOW_NORMAL)
 while True:
     ok, img = cap.read()
     if not ok: break
-    img = cv2.flip(img, 1); h, w = img.shape[:2]
+    img = cv2.flip(img, 1); h, w = img.shape[:2] # • img.shape[:2] extracts (height, width); these values are required for converting landmarks from normalized coordinates to pixels.
     res = hands.process(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 # This is the real-time processing loop of the gesture app. while True keeps the program running until you manually break out (like pressing a quit key) or the camera stops providing frames. cap.read() attempts to grab the latest frame from the webcam. It returns ok (a boolean success flag) and img (the actual frame as a NumPy array). If ok becomes False, it means the camera feed failed or ended, so the loop exits safely using break. Next, cv2.flip(img, 1) mirrors the frame horizontally (flip code 1), making the webcam behave like a mirror—this feels more intuitive for gesture control because your hand movement direction matches what you see on screen. h, w = img.shape[:2] reads the frame height and width so later you can convert MediaPipe’s normalized landmark coordinates (0 to 1) into real pixel coordinates (xw, yh). Finally, cv2.cvtColor(img, cv2.COLOR_BGR2RGB) converts OpenCV’s default BGR image format to RGB because MediaPipe expects RGB input. hands.process(...) runs hand detection and tracking on that RGB frame and returns a result object (res) that may include detected hand landmarks (res.multi_hand_landmarks) and other metadata.
 
@@ -91,10 +91,10 @@ while True:
 
 # To read MediaPipe's thumb tip and index finger tip landmarks, convert them from normalized coordinates into pixel positions, visualize them on the camera feed, and calculate the real pixel distance between the two fingertips for gesture-based control.
             lm = hand.landmark
-            tp = (int(lm[TH].x*w), int(lm[TH].y*h)); ip = (int(lm[IX].x*w), int(lm[IX].y*h))
+            tp = (int(lm[TH].x*w), int(lm[TH].y*h)); ip = (int(lm[IX].x*w), int(lm[IX].y*h)) # tp (thumb position) and ip (index position)  , thumb tip landmark (lm[TH]) and index tip landmark (lm[IX])
             cv2.circle(img, tp, 10, (255,0,0), cv2.FILLED); cv2.circle(img, ip, 10, (255,0,0), cv2.FILLED)
             cv2.line(img, tp, ip, (0,255,0), 3)
-            dist = float(np.hypot(ip[0]-tp[0], ip[1]-tp[1]))
+            dist = float(np.hypot(ip[0]-tp[0], ip[1]-tp[1])) # hypot stands for “hypotenuse.”
 # hand.landmark gives you the list of 21 hand landmarks detected by MediaPipe for that hand. Each landmark has normalized coordinates (x, y) between 0.0 and 1.0, relative to the frame size. tp (thumb position) and ip (index position) are computed by taking the thumb tip landmark (lm[TH]) and index tip landmark (lm[IX]) and converting them into pixel coordinates by multiplying x by frame width w and y by frame height h. The int(...) is used because OpenCV drawing functions expect integer pixel coordinates. The code draws a filled circle on the thumb and index positions (cv2.circle) so the user can clearly see the tracked fingertip points. It also draws a line between them (cv2.line), making the gesture distance visually understandable. Finally, np.hypot(dx, dy) calculates the Euclidean distance between the two points using √(dx² + dy²). Converting it to float ensures it’s a clean numeric value for later interpolation (mapping distance → volume/brightness). This dist is the key signal: closer fingers usually mean lower value, farther fingers mean higher value.
 
 # lm = hand.landmark retrieves the 21 landmark objects for the detected hand.
