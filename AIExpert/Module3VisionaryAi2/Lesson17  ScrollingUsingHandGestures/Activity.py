@@ -1,4 +1,4 @@
-
+# py -3.10 -m pip install opencv-python numpy mediapipe==0.10.5 pyautogui 
 import cv2, time, pyautogui
 import mediapipe as mp
 

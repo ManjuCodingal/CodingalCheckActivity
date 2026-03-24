@@ -1,3 +1,4 @@
+# # To run code: py -3.10 "C:\Users\vishn\Documents\CodingalCheckActivity\AIExpert\Module3VisionaryAi2\Lesson18 Gesture-ControlledPhotoApp\Activity.py"
 import cv2, time, numpy as np
 import mediapipe as mp
 
