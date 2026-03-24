@@ -1,3 +1,5 @@
+# To run code: py -3.10 "C:\Users\vishn\Documents\CodingalCheckActivity\AIExpert\Module3VisionaryAi2\Lesson15 IntroductionToGestureControl\AcExplained.py"
+
 # Hand area detection
 import cv2
 import numpy as np

@@ -1,3 +1,4 @@
+# To run code: py -3.10 "C:\Users\vishn\Documents\CodingalCheckActivity\AIExpert\Module3VisionaryAi2\Lesson16 Volume&BrightnessControlUsingHandGestures\AcExplained.py"
 import cv2, mediapipe as mp, numpy as np
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 import screen_brightness_control as sbc

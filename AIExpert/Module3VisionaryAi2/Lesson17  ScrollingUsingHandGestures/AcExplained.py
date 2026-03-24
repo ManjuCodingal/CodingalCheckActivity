@@ -1,5 +1,7 @@
 # py -3.10 -m pip install opencv-python numpy mediapipe==0.10.5 pyautogui 
 
+# To run code: py -3.10 "C:\Users\vishn\Documents\CodingalCheckActivity\AIExpert\Module3VisionaryAi2\Lesson17 ScrollingUsingHandGestures\AcExplained.py"
+
 # To check output open and close hand (show backside of hand to camera, closed fist= scroll down, open fist= scroll up)
 
 # Why  back of hand shown to camera in output checking?

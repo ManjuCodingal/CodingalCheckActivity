@@ -1,0 +1,30 @@
+NLP with Hugging face
+
+🌟 NLP – Natural Language Processing
+NLP is a branch of Artificial Intelligence (AI) that teaches computers to understand, read, and write human language.
+Think of it like this:
+Computers normally “speak” in 0s and 1s.
+NLP helps computers understand words, sentences, and meanings.
+Example:
+You type a question: "What is the weather today?"
+Computer understands your words and answers: "It’s sunny."
+
+🔹 Real-life examples of NLP
+Chatbots – like the assistant on a website
+Google Translate – translates languages
+Voice assistants – Alexa, Siri
+Spell check – in Word or Google Docs
+Text summarization – making a long article short
+
+🌟 Hugging Face
+Hugging Face is a website and tool that gives ready-made AI models for NLP.
+You don’t have to write all the AI from scratch.
+It’s like a library of smart brains that can:
+Understand text
+Translate languages
+Answer questions
+Summarize stories
+
+🌈 Simple analogy
+NLP = teaching a robot to read and understand human language
+Hugging Face = robot toolkit with lots of pre-trained brains
