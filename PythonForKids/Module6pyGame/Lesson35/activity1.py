@@ -45,12 +45,12 @@ class Sprite(pygame.sprite.Sprite): # The Sprite class inherits from pygame.spri
     # Flag to track if the sprite hits a boundary
     boundary_hit = False
     # Check for collision with left or right boundaries and reverse direction
-    if self.rect.left <= 0 or self.rect.right >= 500:
-      self.velocity[0] = -self.velocity[0]
+    if self.rect.left <= 0 or self.rect.right >= 500: # <) Checks if the sprite's left edge has hit the left boundary (0) or if the right edge has hit the right boundary (500). If either condition is true, it means the sprite has collided with a horizontal boundary.
+      self.velocity[0] = -self.velocity[0] # Reverses the horizontal component of the sprite's velocity by negating its value. This causes the sprite to change direction and move in the opposite horizontal direction when it hits a boundary. 0 is used to access the horizontal component of the velocity list, which represents the speed and direction of movement along the x-axis. By negating this value, we effectively reverse the sprite's horizontal movement direction.
       boundary_hit = True
     # Check for collision with top or bottom boundaries and reverse direction
-    if self.rect.top <= 0 or self.rect.bottom >= 400:
-      self.velocity[1] = -self.velocity[1]
+    if self.rect.top <= 0 or self.rect.bottom >= 400: # Checks if the sprite's top edge has hit the top boundary (0) or if the bottom edge has hit the bottom boundary (400). If either condition is true, it means the sprite has collided with a vertical boundary.
+      self.velocity[1] = -self.velocity[1] # Reverses the vertical component of the sprite's velocity by negating its value. This causes the sprite to change direction and move in the opposite vertical direction when it hits a boundary. 1 is used to access the vertical component of the velocity list, which represents the speed and direction of movement along the y-axis. By negating this value, we effectively reverse the sprite's vertical movement direction.
       boundary_hit = True
 
     # If a boundary was hit, post events to change colors
