@@ -89,7 +89,7 @@ def fire_bullet(x, y):
     # Fire a bullet from the player's position
     global bullet_state
     bullet_state = "fire" # Set the bullet state to "fire" to indicate that the bullet is currently active and moving upwards on the screen. This allows the game to manage the bullet's movement and collision detection while it is in flight.
-    screen.blit(bulletImg, (x + 16, y + 10))
+    screen.blit(bulletImg, (x + 16, y + 10)) # Draw the bullet on the screen at the specified position. The bullet is drawn slightly offset from the player's position (x + 16, y + 10) to make it appear as if it is being fired from the center of the player's image. This creates a more visually appealing shooting effect, as the bullet will seem to originate from the player's character rather than from an arbitrary point on the screen.
 
 def isCollision(enemyX, enemyY, bulletX, bulletY):
     # Check if there is a collision between the enemy and a bullet
