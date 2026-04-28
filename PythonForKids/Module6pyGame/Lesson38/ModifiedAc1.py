@@ -47,7 +47,7 @@
 #     fire_bullet(bulletX, bulletY)
 #     bulletY -= bulletY_change
 # ✅ New:
-# for bullet in bullets[:]:
+# for bullet in bullets[:]:  # : in [] to safely remove bullets while iterating
 #     bullet[1] -= BULLET_SPEED_Y
 #     screen.blit(bulletImg, (bullet[0], bullet[1]))
 
