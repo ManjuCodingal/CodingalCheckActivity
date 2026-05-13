@@ -1,0 +1,17 @@
+| UI Element    | `tk` Look     | `ttk` Look      |
+| ------------- | ------------- | --------------- |
+| Button        | Flat gray     | Modern rounded  |
+| Entry box     | Old border    | Clean styled    |
+| Labels        | Plain         | Better spacing  |
+| Combobox      | Not available | Modern dropdown |
+| Theme support | Poor          | Excellent       |
+
+* With ttk
+Widgets automatically use the operating system’s theme.
+Example:
+ttk.Button(root, text="Place Order")
+Appearance becomes:
+smoother
+modern
+professional
+native to Windows/macOS/Linux
