@@ -82,7 +82,7 @@ sp1.rect.y = random.randint(0, 370) # Sets the y-coordinate of the sprite's rect
 all_sprites_list.add(sp1) # Adds the sprite instance (sp1) to the all_sprites_list group. This allows us to manage and update the sprite along with any other sprites that may be added to the group in the future. By adding the sprite to the group, we can easily call update() and draw() methods on the entire group, which simplifies our game loop and keeps our code organized.
 
 # Create the game window
-screen = pygame.display.set_mode((500, 400))
+screen = pygame.display.set_mode((500, 400)) # Initializes the game window with a width of 500 pixels and a height of 400 pixels. This creates the surface on which we will draw our sprites and background. The set_mode() function returns a Surface object that represents the display, and we store it in the variable screen for later use when we need to fill the background color and draw our sprites.
 # Set the window title
 pygame.display.set_caption("Boundary Sprite")
 # Set the initial background color
